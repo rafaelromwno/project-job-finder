@@ -16,6 +16,6 @@ app.get
 (
     '/',
     (require, response) => {
-        response.send("Está funcionando 2")
+        response.send("Está funcionando")
     }
 )
