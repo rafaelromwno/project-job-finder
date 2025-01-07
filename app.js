@@ -1,6 +1,7 @@
-const express = require('express');
-const app = express();
-const db = require('./database/connection');
+const express    = require('express');
+const app        = express();
+const db         = require('./database/connection');
+const bodyParser = require('body-parser');
 
 const PORT = 3000;
 
@@ -12,6 +13,10 @@ app.listen
         console.log("O express está rodando na porta " + PORT);
     }
 )
+
+// body parser
+
+app.use(bodyParser.urlencoded({extended: false}));
 
 // database connection
 
@@ -32,3 +37,7 @@ app.get
         response.send("Está funcionando")
     }
 )
+
+// jobs routes
+
+app.use('/jobs', require('./routes/jobsRoutes'));
