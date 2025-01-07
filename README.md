@@ -10,7 +10,7 @@ Welcome to the **Job Finder** repository, a job posting site developed as part o
 - **Sequelize**: ORM used for database manipulation.
 - **Express**: Web Framework for creating routes and APIs.
 - **Postman**: Tool for testing and documenting APIs.
-- **SQL Server**: Relational database supported by the project.
+- **SQLite**: SQLite is a database engine that allows users to interact with a relational database.
 
 ## Features
 
