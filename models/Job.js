@@ -32,4 +32,4 @@ const Job = database.define
     }
 )
 
-modeule.exports = Job;
+module.exports = Job;
