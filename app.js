@@ -13,10 +13,25 @@ app.listen
         console.log("O express está rodando na porta " + PORT);
     }
 )
+.on
+(
+  'error', 
+  (err) => 
+  {
+    if (err.code === 'EADDRINUSE') 
+    {
+      console.error('Porta 3000 já está em uso. Tente outra porta.');
+    } 
+    else 
+    {
+      console.error(err);
+    }
+  }
+);
 
 // body parser
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // database connection
 
