@@ -8,6 +8,17 @@ router.get('/test', (req, res) => {
     res.send('Deu certo!');
 });
 
+//
+
+router.get
+(
+    '/add',
+    (require, response) => 
+    {
+        response.render('add');
+    }
+);
+
 // add job via post
 
 router.post

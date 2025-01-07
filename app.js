@@ -1,7 +1,10 @@
-const express    = require('express');
-const app        = express();
-const db         = require('./database/connection');
-const bodyParser = require('body-parser');
+const express           = require('express');
+const app               = express();
+const expressHandlebars = require('express-handlebars');
+const path              = require('path');
+const db                = require('./database/connection');
+const bodyParser        = require('body-parser');
+
 
 const PORT = 3000;
 
@@ -33,6 +36,16 @@ app.listen
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// handle bars
+
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', expressHandlebars.engine({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// static folder
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 // database connection
 
 db.authenticate()
@@ -49,9 +62,9 @@ app.get
 (
     '/',
     (require, response) => {
-        response.send("Está funcionando")
+        response.render('index');
     }
-)
+);
 
 // jobs routes
 
