@@ -4,6 +4,9 @@ const expressHandlebars = require('express-handlebars');
 const path              = require('path');
 const db                = require('./database/connection');
 const bodyParser        = require('body-parser');
+const Job               = require('./models/Job')
+const Sequelize         = require('sequelize');
+const op                = Sequelize.Op;
 
 
 const PORT = 3000;
@@ -61,8 +64,72 @@ db.authenticate()
 app.get
 (
     '/',
-    (require, response) => {
-        response.render('index');
+    (require, response) => 
+    {
+
+      let search = require.query.job;
+      let query = '%'+search+'%'; // wild card (%)
+
+      if(!search)
+      {
+          Job.findAll
+        (
+          { 
+            order: 
+            [
+            
+              ['createdAt', 'DESC']
+
+            ]
+          }
+        )
+        .then
+        (
+          jobs => 
+          {
+
+            response.render('index', { jobs });
+            
+          }
+        )
+        .catch
+        (
+          error => console.log(error)
+        )
+      }
+      else
+      {
+        Job.findAll
+        (
+          { 
+            where: 
+            {
+              title: { [op.like]: query }
+            },
+            order: 
+            [
+            
+              ['createdAt', 'DESC']
+
+            ]
+          }
+        )
+        .then
+        (
+          jobs => 
+          {
+
+            response.render('index', { jobs, search });
+            
+          }
+        )
+        .catch
+        (
+          error => console.log(error)
+        )
+      }
+
+      
     }
 );
 
