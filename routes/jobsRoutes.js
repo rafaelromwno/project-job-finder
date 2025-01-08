@@ -8,7 +8,7 @@ router.get('/test', (req, res) => {
     res.send('Deu certo!');
 });
 
-//
+// shipping route form
 
 router.get
 (
@@ -16,6 +16,39 @@ router.get
     (require, response) => 
     {
         response.render('add');
+    }
+);
+
+// job vacancy details
+
+router.get
+(
+    '/view/:id',
+    (require, response) => 
+    {
+        Job.findOne
+        (
+            {
+                where: 
+                {
+                    id: require.params.id
+                }
+            }
+        )
+        .then
+        (
+            job => 
+            {
+                response.render
+                (
+                    'view', { job }
+                )
+            }
+        )
+        .catch
+        (
+            error => console.log(error)
+        )
     }
 );
 
