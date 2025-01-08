@@ -1,25 +1,25 @@
-const express = require('express');
-const router = express.Router();
-const Job = require('../models/Job');
+const express = require('express'); // import express module
+const router = express.Router(); // create a new router instance
+const Job = require('../models/Job'); // import job model
 
-// test
+// test route
 
 router.get('/test', (req, res) => {
-    res.send('Deu certo!');
+    res.send('deu certo!'); // send a simple success message to verify the route
 });
 
-// shipping route form
+// route to render the form for adding a new job
 
 router.get
 (
     '/add',
     (require, response) => 
     {
-        response.render('add');
+        response.render('add'); // render the 'add' view (e.g., add.handlebars or add.ejs)
     }
 );
 
-// job vacancy details
+// route to display job vacancy details
 
 router.get
 (
@@ -31,7 +31,7 @@ router.get
             {
                 where: 
                 {
-                    id: require.params.id
+                    id: require.params.id // retrieve the job id from the route parameters
                 }
             }
         )
@@ -41,27 +41,28 @@ router.get
             {
                 response.render
                 (
-                    'view', { job }
+                    'view', { job } // render the 'view' page and pass the job data to the view
                 )
             }
         )
         .catch
         (
-            error => console.log(error)
+            error => console.log(error) // log any errors during the database query
         )
     }
 );
 
-// add job via post
+// route to add a new job via post request
 
 router.post
 (
     '/add', 
     (require, response) => 
     {
-        let {title, salary, company, description, email, new_job} = require.body;
+        // destructure the job details from the request body
+        let { title, salary, company, description, email, new_job } = require.body;
 
-        // insert 
+        // insert the new job into the database
         Job.create
         (
             {
@@ -77,17 +78,19 @@ router.post
         (
             () => 
             {
-                response.redirect('/');
+                response.redirect('/'); // redirect to the home page after successful insertion
             }
         )
         .catch
         (            
             error => 
             {
-                console.log(error);
+                console.log(error); // log any errors during the database operation
             }            
         );
     }
 );
+
+// export the router to be used in other parts of the application
 
 module.exports = router;
