@@ -25,6 +25,10 @@ SQLite is utilized as the database engine for this project. It is a file-based r
 
 SQLite was chosen for this project because it is easy to set up and is well-suited for development and testing environments. For larger-scale deployments, a more robust database like PostgreSQL or MySQL could be used with Sequelize as well.
 
+## Project Result
+
+https://github.com/user-attachments/assets/693fe648-c0fa-4882-ac2c-77501f82090a
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
